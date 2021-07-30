@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import AddModal from "./AddModal";
+import TrList from "./trList";
 import "./App.css";
 
 function App() {
@@ -13,13 +14,19 @@ function App() {
     const createUser = (val) => {
         let newUser = val;
         tableRowList.push(newUser);
-        updateTableRow(tableRowList);
+        updateTableRow([...tableRowList]);
+    }
+
+    const deleteUser = (idx) => {
+        tableRowList.splice(idx, 1);
+        updateTableRow([...tableRowList]);
     }
 
     return !addView ? (
         <div className="App">
             <button onClick={() => setAddView(true)}>Add</button>
             <table>
+                <thead>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
@@ -29,19 +36,23 @@ function App() {
 
                     <th>Action</th>
                 </tr>
+                </thead>
+                <tbody>
                 {tableRowList.map((val, idx) => (
-                    <tr>
-                        <td>{val.firstName + " " + val.lastName}</td>
-                        <td>{val.email}</td>
-                        <td>{val.mobile}</td>
-                        <td>{val.locationType}</td>
-                        <td>{val.locationString}</td>
-                        <td>
-                            <button>Mark Update</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
+                    <TrList idx={idx} val={val} deleteUser={deleteUser}/>
+                    // <tr>
+                    //     <td>{val.firstName + " " + val.lastName}</td>
+                    //     <td>{val.email}</td>
+                    //     <td>{val.mobile}</td>
+                    //     <td>{val.locationType}</td>
+                    //     <td>{val.locationString}</td>
+                    //     <td>
+                    //         <button>Mark Update</button>
+                    //         <button onClick={(idx) => deleteUser(idx)}>Delete</button>
+                    //     </td>
+                    // </tr>
                 ))}
+                </tbody>
             </table>
         </div>
     ) : (
