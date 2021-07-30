@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import AddModal from "./AddModal";
+import "./App.css";
 
 function App() {
-  return (
+  const [tableRowList, updateTableRow] = useState([]);
+  const [addView, setAddView] = useState(false);
+
+  function getModal(val) {
+    setAddView(val);
+  }
+
+  return !addView ? (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => setAddView(true)}>Add</button>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile Number</th>
+          <th>Location Type</th>
+          <th>Location String</th>
+
+          <th>Action</th>
+        </tr>
+        {tableRowList.map((val, idx) => (
+          <tr>
+            <td>val.name</td>
+            <td>val.email</td>
+            <td>val.mobNum</td>
+            <td>val.locType</td>
+            <td>val.locStr</td>
+            <td>
+              <button>Mark Update</button>
+              <button>Delete</button>
+            </td>
+          </tr>
+        ))}
+      </table>
     </div>
+  ) : (
+    <AddModal showAdd={addView} closeModal={getModal} />
   );
 }
 
