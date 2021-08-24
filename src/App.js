@@ -40,17 +40,6 @@ function App() {
                 <tbody>
                 {tableRowList.map((val, idx) => (
                     <TrList idx={idx} val={val} deleteUser={deleteUser}/>
-                    // <tr>
-                    //     <td>{val.firstName + " " + val.lastName}</td>
-                    //     <td>{val.email}</td>
-                    //     <td>{val.mobile}</td>
-                    //     <td>{val.locationType}</td>
-                    //     <td>{val.locationString}</td>
-                    //     <td>
-                    //         <button>Mark Update</button>
-                    //         <button onClick={(idx) => deleteUser(idx)}>Delete</button>
-                    //     </td>
-                    // </tr>
                 ))}
                 </tbody>
             </table>
